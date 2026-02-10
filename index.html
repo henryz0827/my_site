@@ -1,0 +1,1006 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Henry Zhao — Builder & Researcher</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;0,600;1,300;1,400&family=DM+Sans:wght@300;400;500;600&family=JetBrains+Mono:wght@300;400&display=swap" rel="stylesheet">
+<style>
+:root {
+  --bg: #0a0a0a;
+  --fg: #e8e4de;
+  --fg-dim: #8a857d;
+  --accent: #c9a86c;
+  --accent-glow: #c9a86c33;
+  --card-bg: #131311;
+  --card-border: #1f1e1a;
+  --serif: 'Cormorant Garamond', Georgia, serif;
+  --sans: 'DM Sans', system-ui, sans-serif;
+  --mono: 'JetBrains Mono', monospace;
+}
+
+* { margin: 0; padding: 0; box-sizing: border-box; }
+
+html { scroll-behavior: smooth; font-size: 16px; }
+
+body {
+  background: var(--bg);
+  color: var(--fg);
+  font-family: var(--sans);
+  font-weight: 300;
+  line-height: 1.7;
+  overflow-x: hidden;
+  -webkit-font-smoothing: antialiased;
+}
+
+::selection {
+  background: var(--accent);
+  color: var(--bg);
+}
+
+/* ─── Grain overlay ─── */
+body::before {
+  content: '';
+  position: fixed;
+  inset: 0;
+  background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 256 256' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)' opacity='0.04'/%3E%3C/svg%3E");
+  pointer-events: none;
+  z-index: 9999;
+}
+
+/* ─── Layout ─── */
+.container {
+  max-width: 1100px;
+  margin: 0 auto;
+  padding: 0 2rem;
+}
+
+/* ─── Navigation ─── */
+nav {
+  position: fixed;
+  top: 0;
+  left: 0;
+  right: 0;
+  z-index: 100;
+  padding: 1.25rem 2rem;
+  backdrop-filter: blur(20px);
+  background: rgba(10, 10, 10, 0.7);
+  border-bottom: 1px solid transparent;
+  transition: border-color 0.4s;
+}
+
+nav.scrolled { border-bottom-color: var(--card-border); }
+
+nav .nav-inner {
+  max-width: 1100px;
+  margin: 0 auto;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+nav .logo {
+  font-family: var(--serif);
+  font-size: 1.25rem;
+  font-weight: 300;
+  letter-spacing: 0.02em;
+  color: var(--fg);
+  text-decoration: none;
+}
+
+nav .logo span { color: var(--accent); }
+
+nav .nav-links {
+  display: flex;
+  gap: 2rem;
+  list-style: none;
+}
+
+nav .nav-links a {
+  color: var(--fg-dim);
+  text-decoration: none;
+  font-size: 0.8rem;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+  font-weight: 400;
+  transition: color 0.3s;
+}
+
+nav .nav-links a:hover { color: var(--accent); }
+
+.menu-toggle {
+  display: none;
+  background: none;
+  border: none;
+  color: var(--fg);
+  cursor: pointer;
+  padding: 0.5rem;
+}
+
+.menu-toggle span {
+  display: block;
+  width: 22px;
+  height: 1.5px;
+  background: var(--fg);
+  margin: 5px 0;
+  transition: all 0.3s;
+}
+
+/* ─── Hero ─── */
+.hero {
+  min-height: 100vh;
+  display: flex;
+  align-items: center;
+  position: relative;
+  overflow: hidden;
+}
+
+.hero::before {
+  content: '';
+  position: absolute;
+  top: -20%;
+  right: -10%;
+  width: 600px;
+  height: 600px;
+  background: radial-gradient(circle, var(--accent-glow) 0%, transparent 70%);
+  border-radius: 50%;
+  animation: pulse 8s ease-in-out infinite;
+}
+
+@keyframes pulse {
+  0%, 100% { transform: scale(1); opacity: 0.5; }
+  50% { transform: scale(1.15); opacity: 0.8; }
+}
+
+.hero-content {
+  position: relative;
+  z-index: 1;
+  padding: 6rem 0;
+}
+
+.hero-eyebrow {
+  font-family: var(--mono);
+  font-size: 0.75rem;
+  color: var(--accent);
+  letter-spacing: 0.15em;
+  text-transform: uppercase;
+  margin-bottom: 1.5rem;
+  opacity: 0;
+  animation: fadeUp 0.8s ease forwards 0.2s;
+}
+
+.hero h1 {
+  font-family: var(--serif);
+  font-size: clamp(3rem, 8vw, 6.5rem);
+  font-weight: 300;
+  line-height: 1.05;
+  letter-spacing: -0.02em;
+  margin-bottom: 2rem;
+  opacity: 0;
+  animation: fadeUp 0.8s ease forwards 0.4s;
+}
+
+.hero h1 em {
+  font-style: italic;
+  color: var(--accent);
+}
+
+.hero-desc {
+  max-width: 520px;
+  font-size: 1.05rem;
+  color: var(--fg-dim);
+  line-height: 1.8;
+  margin-bottom: 2.5rem;
+  opacity: 0;
+  animation: fadeUp 0.8s ease forwards 0.6s;
+}
+
+.hero-links {
+  display: flex;
+  gap: 1rem;
+  flex-wrap: wrap;
+  opacity: 0;
+  animation: fadeUp 0.8s ease forwards 0.8s;
+}
+
+.hero-links a {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.5rem;
+  padding: 0.6rem 1.4rem;
+  border: 1px solid var(--card-border);
+  border-radius: 100px;
+  color: var(--fg-dim);
+  text-decoration: none;
+  font-size: 0.85rem;
+  font-weight: 400;
+  transition: all 0.3s;
+}
+
+.hero-links a:hover {
+  border-color: var(--accent);
+  color: var(--accent);
+  background: var(--accent-glow);
+}
+
+.hero-links a svg {
+  width: 16px;
+  height: 16px;
+  fill: currentColor;
+}
+
+@keyframes fadeUp {
+  from { opacity: 0; transform: translateY(20px); }
+  to { opacity: 1; transform: translateY(0); }
+}
+
+/* ─── Section Common ─── */
+section { padding: 5rem 0; }
+
+.section-label {
+  font-family: var(--mono);
+  font-size: 0.7rem;
+  color: var(--accent);
+  letter-spacing: 0.2em;
+  text-transform: uppercase;
+  margin-bottom: 0.75rem;
+}
+
+.section-title {
+  font-family: var(--serif);
+  font-size: clamp(2rem, 4vw, 3rem);
+  font-weight: 300;
+  line-height: 1.2;
+  margin-bottom: 3rem;
+}
+
+/* ─── Divider ─── */
+.divider {
+  border: none;
+  height: 1px;
+  background: linear-gradient(90deg, transparent, var(--card-border), transparent);
+  margin: 0;
+}
+
+/* ─── Experience Cards ─── */
+.exp-grid {
+  display: grid;
+  gap: 1.5rem;
+}
+
+.exp-card {
+  background: var(--card-bg);
+  border: 1px solid var(--card-border);
+  border-radius: 12px;
+  padding: 2rem;
+  transition: all 0.4s;
+  position: relative;
+  overflow: hidden;
+}
+
+.exp-card::before {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 3px;
+  height: 0;
+  background: var(--accent);
+  transition: height 0.4s;
+}
+
+.exp-card:hover::before { height: 100%; }
+.exp-card:hover { border-color: #2a2820; }
+
+.exp-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: flex-start;
+  margin-bottom: 1rem;
+  flex-wrap: wrap;
+  gap: 0.5rem;
+}
+
+.exp-company {
+  font-family: var(--serif);
+  font-size: 1.5rem;
+  font-weight: 400;
+}
+
+.exp-role {
+  font-size: 0.95rem;
+  color: var(--fg-dim);
+  margin-bottom: 1rem;
+}
+
+.exp-date {
+  font-family: var(--mono);
+  font-size: 0.75rem;
+  color: var(--fg-dim);
+  letter-spacing: 0.05em;
+}
+
+.exp-bullets {
+  list-style: none;
+  padding: 0;
+}
+
+.exp-bullets li {
+  position: relative;
+  padding-left: 1.25rem;
+  margin-bottom: 0.6rem;
+  font-size: 0.9rem;
+  color: var(--fg-dim);
+  line-height: 1.7;
+}
+
+.exp-bullets li::before {
+  content: '';
+  position: absolute;
+  left: 0;
+  top: 0.7em;
+  width: 5px;
+  height: 5px;
+  border-radius: 50%;
+  background: var(--accent);
+  opacity: 0.6;
+}
+
+.exp-tags {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.4rem;
+  margin-top: 1.25rem;
+}
+
+.exp-tag {
+  font-family: var(--mono);
+  font-size: 0.65rem;
+  padding: 0.3rem 0.7rem;
+  background: rgba(201, 168, 108, 0.08);
+  border: 1px solid rgba(201, 168, 108, 0.15);
+  border-radius: 100px;
+  color: var(--accent);
+  letter-spacing: 0.03em;
+}
+
+/* ─── Research ─── */
+.research-grid {
+  display: grid;
+  gap: 1.5rem;
+}
+
+.research-card {
+  background: var(--card-bg);
+  border: 1px solid var(--card-border);
+  border-radius: 12px;
+  padding: 2rem;
+  transition: all 0.4s;
+}
+
+.research-card:hover { border-color: #2a2820; }
+
+.research-venue {
+  font-family: var(--mono);
+  font-size: 0.7rem;
+  color: var(--accent);
+  letter-spacing: 0.1em;
+  text-transform: uppercase;
+  margin-bottom: 0.75rem;
+}
+
+.research-title {
+  font-family: var(--serif);
+  font-size: 1.35rem;
+  font-weight: 400;
+  margin-bottom: 0.75rem;
+  line-height: 1.4;
+}
+
+.research-desc {
+  font-size: 0.9rem;
+  color: var(--fg-dim);
+  line-height: 1.7;
+  margin-bottom: 1rem;
+}
+
+.research-link {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.4rem;
+  color: var(--accent);
+  text-decoration: none;
+  font-size: 0.85rem;
+  font-weight: 400;
+  transition: opacity 0.3s;
+}
+
+.research-link:hover { opacity: 0.7; }
+
+.research-stat {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.75rem;
+  margin-top: 1rem;
+  flex-wrap: wrap;
+}
+
+.research-stat span {
+  font-family: var(--mono);
+  font-size: 0.75rem;
+  color: var(--fg-dim);
+}
+
+.stat-highlight {
+  color: var(--accent) !important;
+  font-weight: 400;
+}
+
+/* ─── Projects ─── */
+.projects-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+  gap: 1.5rem;
+}
+
+.project-card {
+  background: var(--card-bg);
+  border: 1px solid var(--card-border);
+  border-radius: 12px;
+  padding: 2rem;
+  transition: all 0.4s;
+  display: flex;
+  flex-direction: column;
+}
+
+.project-card:hover { border-color: #2a2820; transform: translateY(-2px); }
+
+.project-icon {
+  font-size: 2rem;
+  margin-bottom: 1.25rem;
+}
+
+.project-name {
+  font-family: var(--serif);
+  font-size: 1.25rem;
+  font-weight: 400;
+  margin-bottom: 0.5rem;
+}
+
+.project-status {
+  font-family: var(--mono);
+  font-size: 0.65rem;
+  color: var(--accent);
+  letter-spacing: 0.1em;
+  text-transform: uppercase;
+  margin-bottom: 1rem;
+}
+
+.project-desc {
+  font-size: 0.88rem;
+  color: var(--fg-dim);
+  line-height: 1.7;
+  flex: 1;
+}
+
+.project-metrics {
+  display: flex;
+  gap: 1.5rem;
+  margin-top: 1.25rem;
+  padding-top: 1.25rem;
+  border-top: 1px solid var(--card-border);
+}
+
+.metric-val {
+  font-family: var(--serif);
+  font-size: 1.5rem;
+  color: var(--accent);
+  font-weight: 400;
+}
+
+.metric-label {
+  font-size: 0.7rem;
+  color: var(--fg-dim);
+  letter-spacing: 0.05em;
+}
+
+/* ─── Education ─── */
+.edu-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+  gap: 1.5rem;
+}
+
+.edu-card {
+  background: var(--card-bg);
+  border: 1px solid var(--card-border);
+  border-radius: 12px;
+  padding: 2rem;
+  position: relative;
+  overflow: hidden;
+}
+
+.edu-school {
+  font-family: var(--serif);
+  font-size: 1.5rem;
+  font-weight: 400;
+  margin-bottom: 0.25rem;
+}
+
+.edu-degree {
+  font-size: 0.9rem;
+  color: var(--fg-dim);
+  margin-bottom: 0.25rem;
+}
+
+.edu-date {
+  font-family: var(--mono);
+  font-size: 0.75rem;
+  color: var(--fg-dim);
+  margin-bottom: 1rem;
+}
+
+.edu-courses {
+  font-size: 0.82rem;
+  color: var(--fg-dim);
+  line-height: 1.8;
+}
+
+.edu-courses strong {
+  color: var(--fg);
+  font-weight: 500;
+}
+
+/* ─── Skills ─── */
+.skills-section {
+  background: var(--card-bg);
+  border: 1px solid var(--card-border);
+  border-radius: 12px;
+  padding: 2.5rem;
+}
+
+.skills-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+  gap: 2rem;
+}
+
+.skill-group-title {
+  font-family: var(--mono);
+  font-size: 0.7rem;
+  color: var(--accent);
+  letter-spacing: 0.15em;
+  text-transform: uppercase;
+  margin-bottom: 0.75rem;
+}
+
+.skill-group-items {
+  font-size: 0.88rem;
+  color: var(--fg-dim);
+  line-height: 2;
+}
+
+/* ─── Awards ─── */
+.awards-row {
+  display: flex;
+  gap: 1.5rem;
+  flex-wrap: wrap;
+  margin-top: 2rem;
+}
+
+.award-badge {
+  display: flex;
+  align-items: center;
+  gap: 0.75rem;
+  padding: 0.75rem 1.25rem;
+  border: 1px solid var(--card-border);
+  border-radius: 100px;
+  background: var(--card-bg);
+}
+
+.award-icon { font-size: 1.25rem; }
+
+.award-text {
+  font-size: 0.85rem;
+  color: var(--fg);
+  font-weight: 400;
+}
+
+.award-sub {
+  font-size: 0.72rem;
+  color: var(--fg-dim);
+}
+
+/* ─── Footer ─── */
+footer {
+  padding: 3rem 0;
+  text-align: center;
+}
+
+.footer-line {
+  font-family: var(--serif);
+  font-size: 1.1rem;
+  font-weight: 300;
+  color: var(--fg-dim);
+  font-style: italic;
+}
+
+.footer-links {
+  display: flex;
+  justify-content: center;
+  gap: 1.5rem;
+  margin-top: 1.25rem;
+}
+
+.footer-links a {
+  color: var(--fg-dim);
+  text-decoration: none;
+  font-size: 0.8rem;
+  transition: color 0.3s;
+}
+
+.footer-links a:hover { color: var(--accent); }
+
+/* ─── Scroll animations ─── */
+.reveal {
+  opacity: 0;
+  transform: translateY(30px);
+  transition: opacity 0.7s ease, transform 0.7s ease;
+}
+
+.reveal.visible {
+  opacity: 1;
+  transform: translateY(0);
+}
+
+/* ─── Mobile ─── */
+@media (max-width: 768px) {
+  .container { padding: 0 1.25rem; }
+  
+  nav .nav-links { display: none; }
+  nav .nav-links.open {
+    display: flex;
+    flex-direction: column;
+    position: absolute;
+    top: 100%;
+    left: 0;
+    right: 0;
+    background: rgba(10, 10, 10, 0.95);
+    backdrop-filter: blur(20px);
+    padding: 1.5rem 2rem;
+    gap: 1.25rem;
+    border-bottom: 1px solid var(--card-border);
+  }
+  
+  .menu-toggle { display: block; }
+  
+  .hero-content { padding: 5rem 0 3rem; }
+  
+  section { padding: 3.5rem 0; }
+  
+  .exp-header { flex-direction: column; }
+  
+  .projects-grid { grid-template-columns: 1fr; }
+  .edu-grid { grid-template-columns: 1fr; }
+  
+  .project-metrics { gap: 1rem; }
+  
+  .skills-grid { grid-template-columns: 1fr; }
+  
+  .awards-row { flex-direction: column; }
+}
+</style>
+</head>
+<body>
+
+<!-- Navigation -->
+<nav id="navbar">
+  <div class="nav-inner">
+    <a href="#" class="logo">H<span>.</span>Z</a>
+    <button class="menu-toggle" onclick="document.querySelector('.nav-links').classList.toggle('open')" aria-label="Menu">
+      <span></span><span></span><span></span>
+    </button>
+    <ul class="nav-links">
+      <li><a href="#work" onclick="closeMenu()">Work</a></li>
+      <li><a href="#research" onclick="closeMenu()">Research</a></li>
+      <li><a href="#projects" onclick="closeMenu()">Projects</a></li>
+      <li><a href="#education" onclick="closeMenu()">Education</a></li>
+      <li><a href="mailto:henry86960@gmail.com" onclick="closeMenu()">Contact</a></li>
+    </ul>
+  </div>
+</nav>
+
+<!-- Hero -->
+<header class="hero">
+  <div class="container">
+    <div class="hero-content">
+      <div class="hero-eyebrow">AI Engineer · Quantitative Researcher · Builder</div>
+      <h1>Henry<br>Zhao</h1>
+      <p class="hero-desc">
+        I build systems that think at scale — from 200-agent enterprise platforms at Lenovo to quantitative alpha signals on Wall Street. Stanford mathematician turned full-stack builder, shipping production AI and publishing research along the way.
+      </p>
+      <div class="hero-links">
+        <a href="mailto:henry86960@gmail.com">
+          <svg viewBox="0 0 24 24"><path d="M20 4H4c-1.1 0-2 .9-2 2v12c0 1.1.9 2 2 2h16c1.1 0 2-.9 2-2V6c0-1.1-.9-2-2-2zm0 4l-8 5-8-5V6l8 5 8-5v2z"/></svg>
+          Email
+        </a>
+        <a href="https://github.com/henryz0827" target="_blank">
+          <svg viewBox="0 0 24 24"><path d="M12 0C5.37 0 0 5.37 0 12c0 5.3 3.438 9.8 8.205 11.385.6.113.82-.258.82-.577 0-.285-.01-1.04-.015-2.04-3.338.724-4.042-1.61-4.042-1.61-.546-1.385-1.335-1.755-1.335-1.755-1.087-.744.084-.729.084-.729 1.205.084 1.838 1.236 1.838 1.236 1.07 1.835 2.809 1.305 3.495.998.108-.776.417-1.305.76-1.605-2.665-.3-5.466-1.332-5.466-5.93 0-1.31.465-2.38 1.235-3.22-.135-.303-.54-1.523.105-3.176 0 0 1.005-.322 3.3 1.23.96-.267 1.98-.399 3-.405 1.02.006 2.04.138 3 .405 2.28-1.552 3.285-1.23 3.285-1.23.645 1.653.24 2.873.12 3.176.765.84 1.23 1.91 1.23 3.22 0 4.61-2.805 5.625-5.475 5.92.42.36.81 1.096.81 2.22 0 1.605-.015 2.896-.015 3.286 0 .315.21.69.825.57C20.565 21.795 24 17.295 24 12c0-6.63-5.37-12-12-12z"/></svg>
+          GitHub
+        </a>
+        <a href="https://linkedin.com/in/YOURURL" target="_blank">
+          <svg viewBox="0 0 24 24"><path d="M20.447 20.452h-3.554v-5.569c0-1.328-.027-3.037-1.852-3.037-1.853 0-2.136 1.445-2.136 2.939v5.667H9.351V9h3.414v1.561h.046c.477-.9 1.637-1.85 3.37-1.85 3.601 0 4.267 2.37 4.267 5.455v6.286zM5.337 7.433a2.062 2.062 0 01-2.063-2.065 2.064 2.064 0 112.063 2.065zm1.782 13.019H3.555V9h3.564v11.452zM22.225 0H1.771C.792 0 0 .774 0 1.729v20.542C0 23.227.792 24 1.771 24h20.451C23.2 24 24 23.227 24 22.271V1.729C24 .774 23.2 0 22.222 0h.003z"/></svg>
+          LinkedIn
+        </a>
+      </div>
+    </div>
+  </div>
+</header>
+
+<div class="container"><hr class="divider"></div>
+
+<!-- Work Experience -->
+<section id="work">
+  <div class="container">
+    <div class="section-label reveal">Experience</div>
+    <h2 class="section-title reveal">Where I've Built</h2>
+    
+    <div class="exp-grid">
+      <div class="exp-card reveal">
+        <div class="exp-header">
+          <div>
+            <div class="exp-company">Lenovo</div>
+            <div class="exp-role">AI Engineer — Algorithm Engineering (Tech Lead)</div>
+          </div>
+          <div class="exp-date">Sep 2024 — Present</div>
+        </div>
+        <ul class="exp-bullets">
+          <li>Architected iChain, Lenovo's enterprise human-AI collaboration platform serving 200+ production agents across 10+ business units, closing the full insight-to-decision-to-action loop</li>
+          <li>Built stateful orchestration engine on LangGraph/LangChain with routing, parallel tool execution, batching/caching, and concurrency controls. Reduced error rate 17%, unit inference cost 32%, and p95 latency 41%</li>
+          <li>Led a 5-engineer team owning design docs, delivery, and architecture reviews; trained domain-adapted 7B SLM via QLoRA, improving F1 12% over GPT-4 baseline</li>
+        </ul>
+        <div class="exp-tags">
+          <span class="exp-tag">LangGraph</span>
+          <span class="exp-tag">LangChain</span>
+          <span class="exp-tag">QLoRA</span>
+          <span class="exp-tag">vLLM</span>
+          <span class="exp-tag">Multi-Agent</span>
+        </div>
+      </div>
+      
+      <div class="exp-card reveal">
+        <div class="exp-header">
+          <div>
+            <div class="exp-company">Morgan Stanley</div>
+            <div class="exp-role">Quantitative Finance Summer Associate</div>
+          </div>
+          <div class="exp-date">May 2023 — Sep 2023</div>
+        </div>
+        <ul class="exp-bullets">
+          <li>Designed equity stock-selection models using IC/IR-ranked alphas with cross-sectional scoring; improved 12-month simulated returns by 15% over the existing production model</li>
+          <li>Built TAQ-level data pipelines computing microstructure features including queue imbalance, adverse selection metrics, and fill probability</li>
+          <li>Developed GRU-based volatility forecaster fusing order book features, intraday volume profiles, and HMM-tagged regime indicators; reduced out-of-sample MAE by 8%</li>
+        </ul>
+        <div class="exp-tags">
+          <span class="exp-tag">Python</span>
+          <span class="exp-tag">R</span>
+          <span class="exp-tag">TAQ Data</span>
+          <span class="exp-tag">GRU</span>
+          <span class="exp-tag">Microstructure</span>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<div class="container"><hr class="divider"></div>
+
+<!-- Research -->
+<section id="research">
+  <div class="container">
+    <div class="section-label reveal">Research</div>
+    <h2 class="section-title reveal">Published & Preprint</h2>
+    
+    <div class="research-grid">
+      <div class="research-card reveal">
+        <div class="research-venue">arXiv Preprint · 2025</div>
+        <div class="research-title">Insider Purchase Signals in Microcap Equities</div>
+        <p class="research-desc">
+          XGBoost signal on 17,237 SEC Form 4 insider purchases from 2018–2024. Identified conditional momentum alpha where insider buys disclosed after >10% pre-disclosure run-up yielded 6.3% mean 30-day CAR vs. 2.3% when disclosed into weakness. Constructed dollar-neutral long-short portfolio achieving annualized Sharpe >1.5 after costs.
+        </p>
+        <a href="https://arxiv.org/abs/2602.06198" target="_blank" class="research-link">
+          Read on arXiv →
+        </a>
+        <div class="research-stat">
+          <span><span class="stat-highlight">6.3%</span> 30-day CAR</span>
+          <span><span class="stat-highlight">&gt;1.5</span> Sharpe</span>
+          <span><span class="stat-highlight">17,237</span> transactions</span>
+        </div>
+      </div>
+      
+      <div class="research-card reveal">
+        <div class="research-venue">BMJ Open · 2021 · Peer Reviewed</div>
+        <div class="research-title">Cross-Study Signal Discovery via Meta-Analysis</div>
+        <p class="research-desc">
+          Random-effects meta-analysis across 6 gene-expression datasets with N=173 samples. Engineered composite ratio-based signal achieving AUC 0.92 vs. 0.52 baseline, with 85% sensitivity on an independent validation cohort.
+        </p>
+        <a href="https://doi.org/10.1136/bmjopen-2021-050963" target="_blank" class="research-link">
+          Read in BMJ Open →
+        </a>
+        <div class="research-stat">
+          <span><span class="stat-highlight">0.92</span> AUC</span>
+          <span><span class="stat-highlight">85%</span> Sensitivity</span>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<div class="container"><hr class="divider"></div>
+
+<!-- Projects -->
+<section id="projects">
+  <div class="container">
+    <div class="section-label reveal">Projects</div>
+    <h2 class="section-title reveal">What I'm Building</h2>
+    
+    <div class="projects-grid">
+      <div class="project-card reveal">
+        <div class="project-icon">⚡</div>
+        <div class="project-name">Low-Latency Multi-Agent Inference System</div>
+        <div class="project-status">Active — Since Aug 2025</div>
+        <p class="project-desc">
+          Supervisor-specialist agent system with adaptive dispatch. Knowledge distillation from teacher to 7B student with INT8 quantization. Configurable multi-model dispatch with structured outputs, automatic fallback routing, and token-level streaming.
+        </p>
+        <div class="project-metrics">
+          <div>
+            <div class="metric-val">&lt;2s</div>
+            <div class="metric-label">E2E Latency</div>
+          </div>
+          <div>
+            <div class="metric-val">73%</div>
+            <div class="metric-label">Cost Reduction</div>
+          </div>
+        </div>
+      </div>
+      
+      <div class="project-card reveal">
+        <div class="project-icon">📈</div>
+        <div class="project-name">Systematic Trading Research Platform</div>
+        <div class="project-status">Active — Since Oct 2024</div>
+        <p class="project-desc">
+          End-to-end backtesting platform with GPU-accelerated XGBoost and LSTM/Transformer ensemble, multi-asset walk-forward evaluation, and transaction-cost-aware position sizing. Covariance estimation via weighted PCA with eigenvalue shrinkage.
+        </p>
+        <div class="project-metrics">
+          <div>
+            <div class="metric-val">196</div>
+            <div class="metric-label">Test Assertions</div>
+          </div>
+          <div>
+            <div class="metric-val">MC</div>
+            <div class="metric-label">Verified</div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<div class="container"><hr class="divider"></div>
+
+<!-- Education -->
+<section id="education">
+  <div class="container">
+    <div class="section-label reveal">Education</div>
+    <h2 class="section-title reveal">Foundations</h2>
+    
+    <div class="edu-grid">
+      <div class="edu-card reveal">
+        <div class="edu-school">Stanford University</div>
+        <div class="edu-degree">Bachelor of Science in Mathematics</div>
+        <div class="edu-date">2017 — 2022</div>
+        <p class="edu-courses">
+          <strong>Key courses:</strong> Stochastic Calculus, Stochastic Processes, Machine Learning, Convex Optimization, Mathematical Finance, Numerical Linear Algebra, Algorithms, Distributed Systems
+        </p>
+      </div>
+      
+      <div class="edu-card reveal">
+        <div class="edu-school">New York University</div>
+        <div class="edu-degree">Master of Science in Biostatistics</div>
+        <div class="edu-date">2022 — 2024</div>
+        <p class="edu-courses">
+          <strong>Key courses:</strong> Time Series Analysis & Statistical Arbitrage, Causal Inference, Probability Theory, Statistical Inference
+        </p>
+      </div>
+    </div>
+    
+    <!-- Awards -->
+    <div class="awards-row reveal">
+      <div class="award-badge">
+        <div class="award-icon">🥇</div>
+        <div>
+          <div class="award-text">WorldQuant Challenge — Gold</div>
+        </div>
+      </div>
+      <div class="award-badge">
+        <div class="award-icon">🤖</div>
+        <div>
+          <div class="award-text">Mathematical Robot Competition — 1st Place</div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<div class="container"><hr class="divider"></div>
+
+<!-- Skills -->
+<section id="skills">
+  <div class="container">
+    <div class="section-label reveal">Toolkit</div>
+    <h2 class="section-title reveal">What I Work With</h2>
+    
+    <div class="skills-section reveal">
+      <div class="skills-grid">
+        <div>
+          <div class="skill-group-title">Languages</div>
+          <div class="skill-group-items">Python · C++17 · R · MATLAB · SQL</div>
+        </div>
+        <div>
+          <div class="skill-group-title">ML / AI</div>
+          <div class="skill-group-items">PyTorch · TensorFlow · XGBoost · LightGBM · scikit-learn · LangGraph · LangChain · HuggingFace · QLoRA/PEFT · vLLM</div>
+        </div>
+        <div>
+          <div class="skill-group-title">Quant</div>
+          <div class="skill-group-items">NumPy · pandas · statsmodels · arch · cvxpy · zipline · Bloomberg · IBKR API</div>
+        </div>
+        <div>
+          <div class="skill-group-title">Infrastructure</div>
+          <div class="skill-group-items">Docker · Kubernetes · Redis · PostgreSQL · Git · Linux · REST/gRPC</div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<div class="container"><hr class="divider"></div>
+
+<!-- Footer -->
+<footer>
+  <div class="container">
+    <p class="footer-line">"Build things that matter, then share what you learn."</p>
+    <div class="footer-links">
+      <a href="mailto:henry86960@gmail.com">henry86960@gmail.com</a>
+      <a href="https://github.com/henryz0827" target="_blank">GitHub</a>
+      <a href="https://linkedin.com/in/YOURURL" target="_blank">LinkedIn</a>
+    </div>
+  </div>
+</footer>
+
+<script>
+// Nav scroll effect
+const nav = document.getElementById('navbar');
+window.addEventListener('scroll', () => {
+  nav.classList.toggle('scrolled', window.scrollY > 40);
+});
+
+// Close mobile menu
+function closeMenu() {
+  document.querySelector('.nav-links').classList.remove('open');
+}
+
+// Scroll reveal
+const observer = new IntersectionObserver((entries) => {
+  entries.forEach(entry => {
+    if (entry.isIntersecting) {
+      entry.target.classList.add('visible');
+    }
+  });
+}, { threshold: 0.1, rootMargin: '0px 0px -40px 0px' });
+
+document.querySelectorAll('.reveal').forEach(el => observer.observe(el));
+</script>
+
+</body>
+</html>
