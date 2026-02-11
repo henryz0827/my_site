@@ -29,37 +29,34 @@
       <h2 class="sec-heading reveal">How I got here</h2>
 
       <div class="prose reveal">
-        <p>People sometimes ask me how a math major ends up building enterprise AI. The honest answer is: I didn't plan any of it. I just kept following whatever I found most interesting, and it kept leading me to the same kind of problem — messy, real-world, nobody-has-a-clean-answer-yet problems. Here's how it happened.</p>
+        <p>I've always been drawn to problems where the answer isn't obvious and the data is messy. That instinct has taken me from pure mathematics at Stanford to the trading floor at Morgan Stanley to leading an AI team at Lenovo. Each chapter built on the last, and each one taught me something I couldn't have learned any other way.</p>
       </div>
     </section>
 
     <section class="sec sec-border-top">
       <div class="prose reveal">
-        <h3 class="story-marker"><span class="story-date">2017 — 2022 · Stanford</span>The accidental toolkit</h3>
-        <p>I remember sitting in my first stochastic calculus lecture thinking "I have no idea what I'll use this for." Three years later I was using it to price volatility surfaces at Morgan Stanley. That kept happening at Stanford — I'd learn something that felt purely abstract, and then it would turn out to be exactly the thing I needed for a real problem I hadn't encountered yet.</p>
-        <p>Convex optimization became the backbone of my portfolio construction code. The machine learning class gave me the confidence to say "I can build that" when someone described a prediction problem. A distributed systems course taught me that being correct is much harder than being clever — a lesson that saved me a lot of pain later.</p>
-        <p>I picked math as a major because I couldn't decide what to do with my life. Everyone around me seemed to know — CS, pre-med, consulting. I just liked solving problems and figured the rest would sort itself out. Looking back, it was the best decision I accidentally made.</p>
+        <h3 class="story-marker"><span class="story-date">2017 — 2022 · Stanford</span>Choosing Mathematics</h3>
+        <p>I chose math because I wanted the deepest toolkit I could get. While most of my peers were optimizing for a specific career path — CS, pre-med, consulting — I bet on versatility. Stochastic calculus, convex optimization, machine learning, distributed systems. I wanted to be the person who could look at any quantitative problem and know how to break it down from first principles.</p>
+        <p>That bet paid off faster than I expected. Stochastic calculus became the language I used to model volatility surfaces at Morgan Stanley. Convex optimization became the backbone of my portfolio construction code. The machine learning coursework gave me the foundation to build production AI systems at Lenovo. Every class that felt abstract at the time turned out to be exactly what I needed next.</p>
       </div>
     </section>
 
     <section class="sec sec-border-top">
       <div class="prose reveal">
-        <h3 class="story-marker"><span class="story-date">Summer 2023 · Morgan Stanley, New York</span>My first day with real data</h3>
-        <p>I still remember the morning I opened my first TAQ dataset. I'd spent years working with clean academic data — CSVs with nice headers, maybe a few missing values. This was different. Millions of rows per day, timestamps down to the microsecond, and every row was a tiny decision someone made with real money. I sat there for an hour just scrolling through it, trying to understand the rhythm.</p>
-        <p>The work itself was equity stock-selection — ranking thousands of stocks by predicted alpha using IC/IR-ranked signals with cross-sectional scoring. I improved simulated returns by <strong>15% over the existing production model</strong>, which was the headline number. But the microstructure work was what actually changed how I think.</p>
-        <p>I built pipelines for queue imbalance, adverse selection metrics, fill probability, and a GRU-based volatility forecaster fusing order book data with HMM-tagged regime indicators. The vol model cut out-of-sample MAE by 8% on stressed weeks.</p>
+        <h3 class="story-marker"><span class="story-date">Summer 2023 · Morgan Stanley, New York</span>Where theory met the real world</h3>
+        <p>Morgan Stanley was where everything clicked. For the first time I was working with data that had real stakes behind it — TAQ feeds with millions of rows per day, timestamps at the microsecond, every entry a decision someone made with actual capital. The pace and the precision were on a different level from anything I'd seen in academia.</p>
+        <p>I worked on equity stock-selection, ranking thousands of stocks by predicted alpha using IC/IR-ranked signals with cross-sectional scoring. I improved simulated returns by <strong>15% over the existing production model</strong>. But the microstructure work was where I really found my footing — I built pipelines for queue imbalance, adverse selection metrics, and fill probability, then developed a GRU-based volatility forecaster fusing order book data with HMM-tagged regime indicators. The vol model cut out-of-sample MAE by 8% on stressed weeks.</p>
       </div>
 
-      <div class="pullquote reveal">That summer I learned something I keep coming back to: most of what looks like a pattern in data is just noise wearing a disguise. The real skill isn't finding patterns — any model can do that. It's knowing which ones will still be there tomorrow.</div>
+      <div class="pullquote reveal">That summer crystallized something for me: the hard part of quantitative work is never finding patterns. Any model can find patterns. The hard part is distinguishing the patterns that persist from the ones that vanish the moment you trade on them.</div>
     </section>
 
     <section class="sec sec-border-top">
       <div class="prose reveal">
-        <h3 class="story-marker"><span class="story-date">Sep 2024 — Present · Lenovo</span>Making AI do real work</h3>
-        <p>After Morgan Stanley I knew what I wanted next: not just models, but <em>systems</em>. I wanted to build something that a non-technical person could use on a Tuesday afternoon to make a better decision than they would have made without it. That's how I ended up leading a team of 5 at Lenovo, building <strong>iChain</strong>.</p>
-        <p>iChain is Lenovo's enterprise human-AI platform — 200+ production agents across 10+ business units. A supply chain manager in Shenzhen uses an agent I built to decide whether to reroute a shipment. A demand planner in Raleigh uses another one to adjust forecasts. The system has to be right, fast, and cheap. There's no room for a model that works great in a notebook but falls apart in production.</p>
-        <p>The part I'm proudest of is the orchestration engine I built on LangGraph. Routing, parallel tool execution, batching, concurrency controls — the kind of infrastructure that makes the difference between a demo and a product. We cut error rate by 17%, inference cost by 32%, and p95 latency by 41%.</p>
-        <p>I also trained a domain-adapted 7B model via QLoRA as our automated quality scorer. It beat GPT-4 on our internal eval by 12% F1, which tells you something about the value of domain-specific data over raw model size.</p>
+        <h3 class="story-marker"><span class="story-date">Sep 2024 — Present · Lenovo</span>Building AI systems that ship</h3>
+        <p>Morgan Stanley gave me strong quantitative foundations. The next step was clear: I wanted to build full systems — not just models, but the infrastructure, orchestration, and deployment that turn a model into something people rely on every day. That's what I do now at Lenovo, where I lead a team of 5 engineers building <strong>iChain</strong>.</p>
+        <p>iChain is Lenovo's enterprise human-AI platform. 200+ production agents across 10+ business units. A supply chain manager uses an agent I architected to decide whether to reroute a shipment. A demand planner uses another to adjust forecasts in real time. These aren't demos. They run in production, and they have to be right, fast, and cost-efficient.</p>
+        <p>I designed the orchestration engine on LangGraph — routing, parallel tool execution, batching, concurrency controls. The kind of infrastructure that separates a prototype from a product. The results: 17% lower error rate, 32% reduction in inference cost, 41% improvement in p95 latency. I also trained a domain-adapted 7B model via QLoRA as our automated quality scorer — it outperformed <GPT-4o> on our internal eval by 12% F1, which reinforced my conviction that domain-specific data matters more than raw model scale.</p>
       </div>
 
       <div class="tags reveal">

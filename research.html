@@ -15,9 +15,9 @@
   </button>
   <ul class="nav-links">
     <li><a href="index.html">About</a></li>
-    <li><a href="story.html">Story</a></li>
-    <li><a href="research.html" class="active">Research</a></li>
     <li><a href="projects.html">Projects</a></li>
+    <li><a href="research.html" class="active">Research</a></li>
+    <li><a href="story.html">Story</a></li>
   </ul>
 </header>
 
@@ -63,7 +63,7 @@
     <!-- BMJ paper -->
     <section class="sec sec-border-top">
       <div class="prose reveal">
-        <h3 class="story-marker"><span class="story-date">2021 · BMJ Open</span><a href="https://doi.org/10.1136/bmjopen-2021-050963" target="_blank">Gene expression ratios as diagnostic signals</a></h3>
+        <h3 class="story-marker"><span class="story-date">2021 · BMJ Open</span><a href="https://doi.org/10.1136/bmjopen-2021-050963" target="_blank">Ratio-based feature engineering for high-dimensional classification</a></h3>
         <p>This was my first research project, and it started with a practical problem: individual gene markers are unreliable across patient cohorts. A gene that performs well in one study often fails in another. I wanted to find features that were stable across populations.</p>
         <p>I ran a random-effects meta-analysis across 6 independent gene-expression datasets. Individual gene expression levels were inconsistent, but certain <em>ratios</em> between genes held steady across all 6 cohorts. I built a composite ratio-based classifier on top of these stable features — it achieved an <strong>AUC of 0.92</strong> with 85% sensitivity on independent validation, up from 0.52 using individual genes alone.</p>
         <p>The lesson carried forward into everything I've done since: predictive power often lives in the relationships between features, not in any single feature on its own.</p>
@@ -86,13 +86,13 @@
     </section>
 
     <nav class="page-nav">
-      <a href="story.html" class="prev">
+      <a href="projects.html" class="prev">
         <span class="page-nav-label">← Previous</span>
-        <span class="page-nav-title">My Story</span>
-      </a>
-      <a href="projects.html" class="next">
-        <span class="page-nav-label">Next →</span>
         <span class="page-nav-title">Projects</span>
+      </a>
+      <a href="story.html" class="next">
+        <span class="page-nav-label">Next →</span>
+        <span class="page-nav-title">My Story</span>
       </a>
     </nav>
 
