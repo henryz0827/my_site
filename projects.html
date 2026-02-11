@@ -1,0 +1,260 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Projects — Henry Zhao</title>
+<link rel="stylesheet" href="styles.css">
+<script src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/3.2.2/es5/tex-mml-chtml.min.js" async></script>
+<style>
+  .formula-block {
+    margin: 1.5rem 0;
+    padding: 1.5rem 2rem;
+    background: var(--bg-elevated);
+    border: 1px solid var(--border);
+    border-radius: 8px;
+    overflow-x: auto;
+    text-align: center;
+  }
+  .formula-note {
+    font-size: 0.78rem;
+    color: var(--fg-muted);
+    margin-top: 0.75rem;
+    text-align: left;
+    line-height: 1.7;
+  }
+  .module-grid {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 1rem;
+    margin: 1.5rem 0;
+  }
+  .module-item {
+    padding: 1.25rem;
+    background: var(--bg-elevated);
+    border: 1px solid var(--border);
+    border-radius: 8px;
+  }
+  .module-name {
+    font-family: var(--mono);
+    font-size: 0.68rem;
+    color: var(--warm);
+    letter-spacing: 0.08em;
+    text-transform: uppercase;
+    margin-bottom: 0.4rem;
+  }
+  .module-desc {
+    font-size: 0.82rem;
+    color: var(--fg-dim);
+    line-height: 1.7;
+    font-weight: 300;
+  }
+  @media (max-width: 768px) {
+    .module-grid { grid-template-columns: 1fr; }
+  }
+</style>
+</head>
+<body>
+
+<header class="topnav">
+  <a href="index.html" class="nav-logo">Henry Zhao</a>
+  <button class="hamburger" onclick="document.querySelector('.nav-links').classList.toggle('open')" aria-label="Menu">
+    <span></span><span></span><span></span>
+  </button>
+  <ul class="nav-links">
+    <li><a href="index.html">About</a></li>
+    <li><a href="story.html">Story</a></li>
+    <li><a href="research.html">Research</a></li>
+    <li><a href="projects.html" class="active">Projects</a></li>
+  </ul>
+</header>
+
+<div class="page-body">
+  <div class="wrap">
+
+    <section class="sec">
+      <div class="sec-label reveal">Projects</div>
+      <h2 class="sec-heading reveal">Things I've built</h2>
+
+      <div class="prose reveal">
+        <p>Two systems I built outside of work — one in systematic trading infrastructure, one in multi-agent orchestration.</p>
+      </div>
+    </section>
+
+    <!-- Trading Platform -->
+    <section class="sec sec-border-top">
+      <div class="prose reveal">
+        <h3 class="story-marker"><span class="story-date">Oct 2024 — Present</span>Systematic Trading Research Platform</h3>
+        <p>A modular Python framework for quantitative portfolio management， the full stack from factor estimation to constrained optimization to walk-forward execution, with every step grounded in theory and verified by tests.</p>
+      </div>
+
+      <div class="module-grid reveal">
+        <div class="module-item">
+          <div class="module-name">Factor Models</div>
+          <div class="module-desc">PCA/PPCA-based statistical factor models with missing data handling (listwise delete, forward fill, EM), loading imputation, real-time diagnostics tracking.</div>
+        </div>
+        <div class="module-item">
+          <div class="module-name">Risk Models</div>
+          <div class="module-desc">Fundamental risk models, currency risk rebasing, linked multi-horizon covariance estimation.</div>
+        </div>
+        <div class="module-item">
+          <div class="module-name">Volatility</div>
+          <div class="module-desc">GARCH(1,1), DCC (Dynamic Conditional Correlation), realized volatility estimators, stochastic time-varying uncertainty (STVU).</div>
+        </div>
+        <div class="module-item">
+          <div class="module-name">Portfolio Optimization</div>
+          <div class="module-desc">Mean-Variance Optimization (three equivalent formulations), Factor-Mimicking Portfolios, factor-neutral idiosyncratic-space portfolios, IC / Fundamental Law analytics.</div>
+        </div>
+        <div class="module-item">
+          <div class="module-name">Constrained & Robust MVO</div>
+          <div class="module-desc">CVXPY solver supporting 10 constraint types (long-only, turnover, tracking error, factor exposure, etc.) with progressive degradation and KKT dual diagnostics. 5 robust approaches for estimation error.</div>
+        </div>
+        <div class="module-item">
+          <div class="module-name">Execution</div>
+          <div class="module-desc">Walk-forward backtesting with transaction cost modeling, Sharpe CI, autocorrelation adjustment, backtest hygiene checks.</div>
+        </div>
+      </div>
+
+      <div class="prose reveal">
+        <p>The constrained MVO solves the standard mean-variance problem with active weight penalties and a full constraint set:</p>
+      </div>
+
+      <div class="formula-block reveal">
+        $$\max_{w} \; \alpha^T w \;-\; \frac{\lambda}{2}\, w^T \Sigma\, w \quad \text{s.t.} \;\; Aw \leq b,\;\; \|w - w_0\|_1 \leq \tau$$
+        <div class="formula-note">where \(\alpha\) is the expected return vector, \(\Sigma\) the risk model covariance, \(\lambda\) the risk aversion parameter, and \(\tau\) the turnover budget. The solver uses a sparse epigraph formulation for \(n=2000+\) assets and falls back through a Cholesky → ridge → pseudo-inverse chain for numerical stability.</div>
+      </div>
+
+      <div class="prose reveal">
+        <p>For spiked covariance structures (low-rank factor model + diagonal idiosyncratic), the platform uses the Woodbury-Sherman-Morrison identity for O(n) solves instead of inverting the full \(n \times n\) matrix:</p>
+      </div>
+
+      <div class="formula-block reveal">
+        $$(\Sigma_{\text{idio}} + B F B^T)^{-1} = \Sigma_{\text{idio}}^{-1} - \Sigma_{\text{idio}}^{-1} B \left(F^{-1} + B^T \Sigma_{\text{idio}}^{-1} B\right)^{-1} B^T \Sigma_{\text{idio}}^{-1}$$
+        <div class="formula-note">This reduces the inversion from \(O(n^3)\) to \(O(nk^2)\) where \(k \ll n\) is the number of factors — critical when optimizing over 2000+ assets with daily rebalancing.</div>
+      </div>
+
+      <div class="stat-bar reveal">
+        <div>
+          <div class="stat-num">28K</div>
+          <div class="stat-desc">Lines of code</div>
+        </div>
+        <div>
+          <div class="stat-num">244</div>
+          <div class="stat-desc">Test assertions</div>
+        </div>
+        <div>
+          <div class="stat-num">MC</div>
+          <div class="stat-desc">Verified</div>
+        </div>
+      </div>
+
+      <div class="tags reveal">
+        <span class="tag">Python</span>
+        <span class="tag">CVXPY</span>
+        <span class="tag">NumPy</span>
+        <span class="tag">XGBoost</span>
+        <span class="tag">LSTM</span>
+        <span class="tag">Transformer</span>
+        <span class="tag">Walk-Forward</span>
+        <span class="tag">Monte Carlo</span>
+      </div>
+    </section>
+
+    <!-- Multi-Agent Framework -->
+    <section class="sec sec-border-top">
+      <div class="prose reveal">
+        <h3 class="story-marker"><span class="story-date">2024 — Present</span>Multi-Agent Inference Framework</h3>
+        <p>A LangGraph-orchestrated multi-agent system where specialized agents each handle a domain, coordinate through belief propagation over a DAG, and produce a unified assessment with explainable reasoning. The application was clinical risk detection, but the architecture is domain-agnostic — it's the same routing-and-fusion pattern applicable to any multi-signal decision problem.</p>
+        <p>Knowledge distillation + mixed-precision quantization compressed the system 93% in size while keeping accuracy within 1.2% of the original. An adaptive router directs easy cases to lightweight models and escalates high-entropy cases to larger ones. Each agent incorporates RAG for evidence-grounded outputs. Validated on N=2,847 across 3 sites, deployed on Kubernetes with MCP-based integration, processing 500+ assessments daily at 99.7% uptime.</p>
+      </div>
+
+      <div class="stat-bar reveal">
+        <div>
+          <div class="stat-num">0.963</div>
+          <div class="stat-desc">AUC-ROC</div>
+        </div>
+        <div>
+          <div class="stat-num">73%</div>
+          <div class="stat-desc">Cost reduction</div>
+        </div>
+        <div>
+          <div class="stat-num">&lt;2s</div>
+          <div class="stat-desc">Latency</div>
+        </div>
+      </div>
+
+      <div class="tags reveal">
+        <span class="tag">LangGraph</span>
+        <span class="tag">Multi-Agent</span>
+        <span class="tag">Knowledge Distillation</span>
+        <span class="tag">RAG</span>
+        <span class="tag">MCP</span>
+        <span class="tag">Kubernetes</span>
+      </div>
+    </section>
+
+    <!-- Background -->
+    <section class="sec sec-border-top">
+      <div class="sec-label reveal">Background</div>
+      <h2 class="sec-heading reveal">Education & toolkit</h2>
+
+      <div class="edu-card reveal">
+        <div class="edu-school">Stanford University</div>
+        <div class="edu-degree">B.S. Mathematics</div>
+        <div class="edu-years">2017 — 2022</div>
+        <div class="edu-courses">Stochastic Calculus · Machine Learning · Convex Optimization · Mathematical Finance · Numerical Linear Algebra · Algorithms · Distributed Systems</div>
+      </div>
+
+      <div class="awards-strip reveal">
+        <div class="award"><span>🥇</span> WorldQuant Challenge — Gold</div>
+        <div class="award"><span>🤖</span> Mathematical Robot Competition — 1st</div>
+      </div>
+
+      <div class="skills-grid reveal" style="margin-top:3rem">
+        <div>
+          <div class="skill-label">Languages</div>
+          <div class="skill-list">Python · C++17 · R · MATLAB · SQL</div>
+        </div>
+        <div>
+          <div class="skill-label">ML / AI</div>
+          <div class="skill-list">PyTorch · TensorFlow · XGBoost · LightGBM · LangGraph · HuggingFace · QLoRA · vLLM</div>
+        </div>
+        <div>
+          <div class="skill-label">Quant</div>
+          <div class="skill-list">NumPy · pandas · statsmodels · cvxpy · zipline · Bloomberg · IBKR</div>
+        </div>
+        <div>
+          <div class="skill-label">Infrastructure</div>
+          <div class="skill-list">Docker · Kubernetes · Redis · PostgreSQL · Git · Linux · gRPC</div>
+        </div>
+      </div>
+    </section>
+
+    <nav class="page-nav">
+      <a href="research.html" class="prev">
+        <span class="page-nav-label">← Previous</span>
+        <span class="page-nav-title">Research</span>
+      </a>
+      <div></div>
+    </nav>
+
+    <footer class="footer">
+      <div class="footer-text">Thanks for reading. If you made it this far, we should probably talk.</div>
+      <div class="footer-links">
+        <a href="mailto:henry86960@gmail.com">henry86960@gmail.com</a>
+        <a href="https://github.com/henryz0827" target="_blank">GitHub</a>
+        <a href="https://linkedin.com/in/YOURURL" target="_blank">LinkedIn</a>
+      </div>
+    </footer>
+
+  </div>
+</div>
+
+<script>
+const obs = new IntersectionObserver(entries => {
+  entries.forEach(e => { if (e.isIntersecting) e.target.classList.add('vis'); });
+}, { threshold: 0.08, rootMargin: '0px 0px -30px 0px' });
+document.querySelectorAll('.reveal').forEach(el => obs.observe(el));
+</script>
+</body>
+</html>

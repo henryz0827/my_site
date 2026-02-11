@@ -1,0 +1,118 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Research — Henry Zhao</title>
+<link rel="stylesheet" href="styles.css">
+</head>
+<body>
+
+<header class="topnav">
+  <a href="index.html" class="nav-logo">Henry Zhao</a>
+  <button class="hamburger" onclick="document.querySelector('.nav-links').classList.toggle('open')" aria-label="Menu">
+    <span></span><span></span><span></span>
+  </button>
+  <ul class="nav-links">
+    <li><a href="index.html">About</a></li>
+    <li><a href="story.html">Story</a></li>
+    <li><a href="research.html" class="active">Research</a></li>
+    <li><a href="projects.html">Projects</a></li>
+  </ul>
+</header>
+
+<div class="page-body">
+  <div class="wrap">
+
+    <section class="sec">
+      <div class="sec-label reveal">Research</div>
+      <h2 class="sec-heading reveal">Papers I've written</h2>
+
+      <div class="prose reveal">
+        <p>I research quantitative signals — patterns in data that predict outcomes. One paper is in finance, one in biostatistics. The fields are different, but the work is the same: engineer features from raw data, build a model, and test whether the signal holds up on data the model has never seen.</p>
+      </div>
+    </section>
+
+    <!-- Insider paper -->
+    <section class="sec sec-border-top">
+      <div class="prose reveal">
+        <h3 class="story-marker"><span class="story-date">2025 · arXiv preprint</span><a href="https://arxiv.org/abs/2602.06198" target="_blank">Insider purchases as alpha signals</a></h3>
+        <p>SEC Form 4 filings are public. When a corporate insider buys their own stock, it's a signal — that much is well-documented. What's less studied is whether the <em>context</em> around the purchase changes the strength of that signal: the price trend leading up to it, the insider's role, the filing delay, how many other insiders bought around the same time.</p>
+        <p>I pulled <strong>17,237 open-market purchase filings</strong> from 2018–2024 and engineered 40+ features capturing momentum context, filing behavior, transaction clustering, and firm liquidity. I trained an XGBoost classifier to rank purchases by conviction.</p>
+        <p>The key finding: context changes everything. Insiders who buy after a >10% pre-disclosure run-up generate a 30-day cumulative abnormal return of <strong>6.3%</strong>. Those who buy into price weakness generate 2.3%. Same event type, very different predictive power. I used the model's output to construct a dollar-neutral long-short portfolio that achieved a <strong>Sharpe ratio above 1.5</strong> after transaction costs.</p>
+      </div>
+
+      <div class="stat-bar reveal">
+        <div>
+          <div class="stat-num">6.3%</div>
+          <div class="stat-desc">30-day CAR</div>
+        </div>
+        <div>
+          <div class="stat-num">&gt;1.5</div>
+          <div class="stat-desc">Sharpe ratio</div>
+        </div>
+        <div>
+          <div class="stat-num">17,237</div>
+          <div class="stat-desc">Transactions</div>
+        </div>
+      </div>
+
+
+    </section>
+
+    <!-- BMJ paper -->
+    <section class="sec sec-border-top">
+      <div class="prose reveal">
+        <h3 class="story-marker"><span class="story-date">2021 · BMJ Open</span><a href="https://doi.org/10.1136/bmjopen-2021-050963" target="_blank">Gene expression ratios as diagnostic signals</a></h3>
+        <p>This was my first research project, and it started with a practical problem: individual gene markers are unreliable across patient cohorts. A gene that performs well in one study often fails in another. I wanted to find features that were stable across populations.</p>
+        <p>I ran a random-effects meta-analysis across 6 independent gene-expression datasets. Individual gene expression levels were inconsistent, but certain <em>ratios</em> between genes held steady across all 6 cohorts. I built a composite ratio-based classifier on top of these stable features — it achieved an <strong>AUC of 0.92</strong> with 85% sensitivity on independent validation, up from 0.52 using individual genes alone.</p>
+        <p>The lesson carried forward into everything I've done since: predictive power often lives in the relationships between features, not in any single feature on its own.</p>
+      </div>
+
+      <div class="stat-bar reveal">
+        <div>
+          <div class="stat-num">0.92</div>
+          <div class="stat-desc">AUC</div>
+        </div>
+        <div>
+          <div class="stat-num">85%</div>
+          <div class="stat-desc">Sensitivity</div>
+        </div>
+        <div>
+          <div class="stat-num">6</div>
+          <div class="stat-desc">Datasets</div>
+        </div>
+      </div>
+    </section>
+
+    <nav class="page-nav">
+      <a href="story.html" class="prev">
+        <span class="page-nav-label">← Previous</span>
+        <span class="page-nav-title">My Story</span>
+      </a>
+      <a href="projects.html" class="next">
+        <span class="page-nav-label">Next →</span>
+        <span class="page-nav-title">Projects</span>
+      </a>
+    </nav>
+
+    <footer class="footer">
+      <div class="footer-text">Thanks for reading. If you made it this far, we should probably talk.</div>
+      <div class="footer-links">
+        <a href="mailto:henry86960@gmail.com">henry86960@gmail.com</a>
+        <a href="https://github.com/henryz0827" target="_blank">GitHub</a>
+        <a href="https://linkedin.com/in/YOURURL" target="_blank">LinkedIn</a>
+      </div>
+    </footer>
+
+  </div>
+</div>
+
+<script>
+const obs = new IntersectionObserver(entries => {
+  entries.forEach(e => { if (e.isIntersecting) e.target.classList.add('vis'); });
+}, { threshold: 0.08, rootMargin: '0px 0px -30px 0px' });
+document.querySelectorAll('.reveal').forEach(el => obs.observe(el));
+</script>
+</body>
+</html>
