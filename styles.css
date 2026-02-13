@@ -396,7 +396,7 @@ a:hover { border-bottom-color: var(--warm); }
   min-height: 100vh;
   display: flex;
   align-items: center;
-  padding: 0 clamp(2rem, 8vw, 8rem);
+  padding: 0;
   position: relative;
 }
 
@@ -421,7 +421,6 @@ a:hover { border-bottom-color: var(--warm); }
   position: relative;
   z-index: 1;
   width: 100%;
-  max-width: 960px;
 }
 
 .hero-label {
@@ -617,7 +616,7 @@ a:hover { border-bottom-color: var(--warm); }
     border-bottom: 1px solid var(--border);
   }
   .hamburger { display: block; }
-  .hero { padding: 0 1.5rem; }
+  .hero { padding: 0; }
   .hero-inner { grid-template-columns: 1fr; }
   .hero-photo { order: -1; max-width: 200px; }
   .hero-photo-placeholder { aspect-ratio: 1; }
