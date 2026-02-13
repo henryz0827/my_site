@@ -31,7 +31,7 @@
       <h2 class="sec-heading reveal">Papers I've written</h2>
 
       <div class="prose reveal">
-        <p>I research quantitative signals — patterns in data that predict outcomes. One paper is in finance, one in biostatistics. The fields are different, but the work is the same: engineer features from raw data, build a model, and test whether the signal holds up on data the model has never seen.</p>
+        <p>I research predictive signal extraction in noisy, high dimensional data. Across domains, my workflow is consistent: define testable hypotheses, engineer domain-grounded features, train OOS models, and verify robustness with temporal splits, ablation tests, and cross cohort validation.</p>
       </div>
     </section>
 
@@ -65,7 +65,7 @@
     <!-- BMJ paper -->
     <section class="sec sec-border-top">
       <div class="prose reveal">
-        <h3 class="story-marker"><span class="story-date">2021 · BMJ Open</span><a href="https://doi.org/10.1136/bmjopen-2021-050963" target="_blank">Ratio-based feature engineering for high-dimensional classification</a></h3>
+        <h3 class="story-marker"><span class="story-date">2021 · BMJ Open</span><a href="https://doi.org/10.1136/bmjopen-2021-050963" target="_blank">Ratio based feature engineering for high dimensional classification</a></h3>
         <p>This was my first research project, and it started with a practical problem: individual gene markers are unreliable across patient cohorts. A gene that performs well in one study often fails in another. I wanted to find features that were stable across populations.</p>
         <p>I ran a random-effects meta-analysis across 6 independent gene-expression datasets. Individual gene expression levels were inconsistent, but certain <em>ratios</em> between genes held steady across all 6 cohorts. I built a composite ratio-based classifier on top of these stable features — it achieved an <strong>AUC of 0.92</strong> with 85% sensitivity on independent validation, up from 0.52 using individual genes alone.</p>
         <p>The lesson carried forward into everything I've done since: predictive power often lives in the relationships between features, not in any single feature on its own.</p>
