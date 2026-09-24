@@ -39,7 +39,7 @@
       <div class="prose reveal">
         <h3 class="story-marker"><span class="story-date">2017 — 2022 · Stanford</span>Choosing Mathematics</h3>
         <p>I chose math because I wanted the deepest toolkit I could get. While most of my peers were optimizing for a specific career path — CS, pre-med, consulting — I bet on versatility. Stochastic calculus, convex optimization, machine learning, distributed systems. I wanted to be the person who could look at any quantitative problem and know how to break it down from first principles.</p>
-        <p>That bet paid off faster than I expected. Stochastic calculus became the language I used to model volatility surfaces at Morgan Stanley. Convex optimization became the backbone of my portfolio construction code. The machine learning coursework gave me the foundation to build production AI systems at Lenovo. Every class that felt abstract at the time turned out to be exactly what I needed next.</p>
+        <p>That bet paid off faster than I expected. Stochastic calculus became the language I used for volatility modeling at Morgan Stanley. Convex optimization became the backbone of my portfolio construction code. The machine learning coursework gave me the foundation to build production AI systems at Lenovo. Every class that felt abstract at the time turned out to be exactly what I needed next.</p>
       </div>
     </section>
 
@@ -47,7 +47,7 @@
       <div class="prose reveal">
         <h3 class="story-marker"><span class="story-date">Summer 2023 · Morgan Stanley, New York</span>Where theory met the real world</h3>
         <p>Morgan Stanley was where everything clicked. For the first time I was working with data that had real stakes behind it — TAQ feeds with millions of rows per day, timestamps at the microsecond, every entry a decision someone made with actual capital. The pace and the precision were on a different level from anything I'd seen in academia.</p>
-        <p>I worked on equity stock-selection, ranking thousands of stocks by predicted alpha using IC/IR-ranked signals with cross-sectional scoring. I improved simulated returns by <strong>15% over the existing production model</strong>. But the microstructure work was where I really found my footing — I built pipelines for queue imbalance, adverse selection metrics, and fill probability, then developed a GRU-based volatility forecaster fusing order book data with HMM-tagged regime indicators. The vol model cut out-of-sample MAE by 8% on stressed weeks.</p>
+        <p>I worked on equity stock selection, developing cross-sectional signals under purged combinatorial cross-validation. They improved simulated returns by <strong>15% over the production baseline</strong> while keeping turnover below 80% and tracking error under 30 bps. But the microstructure work was where I really found my footing — I built TAQ-level pipelines for spread, order imbalance, and trade informativeness, then trained a GRU volatility model on order-book snapshots and intraday volume profiles. Under walk-forward validation it cut out-of-sample MAE by 8% on stressed weeks.</p>
       </div>
 
       <div class="pullquote reveal">That summer crystallized something for me: the hard part of quantitative work is never finding patterns. Any model can find patterns. The hard part is distinguishing the patterns that persist from the ones that vanish the moment you trade on them.</div>
@@ -56,16 +56,24 @@
     <section class="sec sec-border-top">
       <div class="prose reveal">
         <h3 class="story-marker"><span class="story-date">Sep 2024 — Present · Lenovo</span>Building AI systems that ship</h3>
-        <p>Morgan Stanley gave me strong quantitative foundations. The next step was clear: I wanted to build full systems — not just models, but the infrastructure, orchestration, and deployment that turn a model into something people rely on every day. That's what I do now at Lenovo, where I lead a team of 5 engineers building <strong>iChain</strong>.</p>
-        <p>iChain is Lenovo's enterprise human-AI platform. 200+ production agents across 10+ business units. A supply chain manager uses an agent I architected to decide whether to reroute a shipment. A demand planner uses another to adjust forecasts in real time. These aren't demos. They run in production, and they have to be right, fast, and cost-efficient.</p>
-        <p>I designed the orchestration engine on LangGraph — routing, parallel tool execution, batching, concurrency controls. The kind of infrastructure that separates a prototype from a product. The results: 17% lower error rate, 32% reduction in inference cost, 41% improvement in p95 latency. I also trained a domain-adapted 7B model via QLoRA as our automated quality scorer — it outperformed <GPT-4o> on our internal eval by 12% F1, which reinforced my conviction that domain-specific data matters more than raw model scale.</p>
+        <p>Morgan Stanley gave me strong quantitative foundations. The next step was clear: I wanted to build full systems — not just models, but the infrastructure, orchestration, and deployment that turn a model into something people rely on every day. That's what I do now at Lenovo, where I'm tech lead on the company's internal AI platform for supply chain and lead a team of five engineers.</p>
+        <p>The platform has gone through two phases. In the first, we built each agent workflow ourselves: supply-chain agents wired to live business data, running in production where they have to be right, fast, and cost-efficient. They proved the value quickly, and demand soon outgrew what any central team could build by hand.</p>
+        <p>So in the second phase we made the platform self-service: business users assemble their own workflows from drag-and-drop components, and I built the backend that makes that composition possible. Orchestration and workflow state run on LangGraph; a versioned config center lets prompts, skills, and components ship as config changes instead of deploys; and MCP forms the tool boundary, so every component declares exactly what data it can reach. The first vertical on that stack was an AI Observation engine, a ReAct agent that pulls live business data through MCP tools and is grounded by design: every answer comes from a tool call, and every number it reports appears verbatim in the data it read.</p>
+        <p>Across the platform: 8 production agent workflows, <strong>17% fewer order-fulfillment errors</strong>, and batching, caching, and model routing that cut unit inference cost by <strong>32%</strong> and p95 latency by <strong>41%</strong>.</p>
       </div>
 
       <div class="tags reveal">
         <span class="tag">LangGraph</span>
-        <span class="tag">QLoRA</span>
+        <span class="tag">MCP</span>
         <span class="tag">vLLM</span>
         <span class="tag">Multi-Agent</span>
+      </div>
+    </section>
+
+    <section class="sec sec-border-top">
+      <div class="prose reveal">
+        <h3 class="story-marker"><span class="story-date">2025 — Present · Research</span>Writing it down</h3>
+        <p>Outside of work I write research papers, both as sole author. One is theory: what a market maker can learn when valuations don't even have a finite variance. The other is empirical: how the market reacts when it learns that a corporate insider has bought, built from raw SEC filings. Both are on the <a href="research.html">Research</a> page.</p>
       </div>
     </section>
 

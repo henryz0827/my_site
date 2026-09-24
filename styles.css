@@ -346,9 +346,19 @@ a:hover { border-bottom-color: var(--warm); }
 }
 
 .edu-courses {
+  display: flex;
+  flex-wrap: wrap;
+  column-gap: 0.45em;
   font-size: 0.88rem;
   color: var(--fg-muted);
   line-height: 1.8;
+}
+
+.edu-courses span { white-space: nowrap; }
+.edu-courses span:not(:last-child)::after {
+  content: "·";
+  margin-left: 0.45em;
+  opacity: 0.6;
 }
 
 .awards-strip {
@@ -370,12 +380,62 @@ a:hover { border-bottom-color: var(--warm); }
   font-weight: 300;
 }
 
+/* ─── Background grid: education + honors ─── */
+.bg-grid {
+  display: grid;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  gap: 1rem;
+}
+
+.bg-grid .edu-card { max-width: none; }
+
+.honors-card {
+  padding: 2rem;
+  background: var(--bg-elevated);
+  border: 1px solid var(--border);
+  border-radius: 12px;
+}
+
+.honors {
+  list-style: none;
+  margin: 0;
+  padding: 0;
+  display: flex;
+  flex-direction: column;
+  gap: 1.15rem;
+}
+
+.honors li {
+  display: flex;
+  align-items: flex-start;
+  gap: 0.85rem;
+}
+
+.honor-icon { font-size: 1.15rem; line-height: 1.35; }
+.honor-title { font-size: 0.98rem; color: var(--fg); }
+.honor-note { font-size: 0.82rem; color: var(--fg-muted); margin-top: 0.15rem; }
+
+@media (max-width: 768px) {
+  .bg-grid { grid-template-columns: 1fr; }
+}
+
 /* ─── Skills ─── */
 .skills-grid {
   display: grid;
-  grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
-  gap: 1.5rem;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  gap: 1rem;
+  margin-top: 2.5rem;
 }
+
+.skill-group {
+  padding: 1.4rem 1.5rem 1.5rem;
+  background: var(--bg-elevated);
+  border: 1px solid var(--border);
+  border-radius: 12px;
+  transition: border-color 0.2s ease;
+}
+
+.skill-group:hover { border-color: var(--warm-dim); }
 
 .skill-label {
   font-family: var(--mono);
@@ -383,7 +443,27 @@ a:hover { border-bottom-color: var(--warm); }
   color: var(--warm);
   letter-spacing: 0.15em;
   text-transform: uppercase;
-  margin-bottom: 0.5rem;
+  margin-bottom: 0.9rem;
+}
+
+.skill-chips {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.45rem;
+}
+
+.chip {
+  font-size: 0.8rem;
+  line-height: 1;
+  padding: 0.45rem 0.75rem;
+  background: var(--bg-surface);
+  border-radius: 6px;
+  color: var(--fg);
+  white-space: nowrap;
+}
+
+@media (max-width: 768px) {
+  .skills-grid { grid-template-columns: 1fr; }
 }
 
 .skill-list {

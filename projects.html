@@ -79,7 +79,7 @@
       <h2 class="sec-heading reveal">Things I've built</h2>
 
       <div class="prose reveal">
-        <p>Two systems I built — one in systematic trading infrastructure, one in multi-agent orchestration.</p>
+        <p>Two systems I built — one in systematic trading infrastructure, one in multi-model risk prediction.</p>
       </div>
     </section>
 
@@ -87,7 +87,7 @@
     <section class="sec sec-border-top">
       <div class="prose reveal">
         <h3 class="story-marker"><span class="story-date">Oct 2024 — Present</span>Systematic Trading Research Platform</h3>
-        <p>A modular Python framework for quantitative portfolio management， the full stack from factor estimation to constrained optimization to walk-forward execution, with every step grounded in theory and verified by tests.</p>
+        <p>A modular Python framework for quantitative portfolio management: the full stack from factor estimation to constrained optimization to walk-forward execution, with every step grounded in theory and covered by automated tests.</p>
       </div>
 
       <div class="module-grid reveal">
@@ -137,16 +137,16 @@
 
       <div class="stat-bar reveal">
         <div>
-          <div class="stat-num">50K</div>
-          <div class="stat-desc">Lines of code</div>
+          <div class="stat-num">80K+</div>
+          <div class="stat-desc">Lines of Python</div>
         </div>
         <div>
-          <div class="stat-num">244</div>
-          <div class="stat-desc">Test assertions</div>
+          <div class="stat-num">1,100+</div>
+          <div class="stat-desc">Automated tests</div>
         </div>
         <div>
-          <div class="stat-num">MC</div>
-          <div class="stat-desc">Verified</div>
+          <div class="stat-num">10</div>
+          <div class="stat-desc">Constraint types</div>
         </div>
       </div>
 
@@ -154,20 +154,19 @@
         <span class="tag">Python</span>
         <span class="tag">CVXPY</span>
         <span class="tag">NumPy</span>
-        <span class="tag">XGBoost</span>
-        <span class="tag">LSTM</span>
-        <span class="tag">Transformer</span>
+        <span class="tag">GARCH / DCC</span>
+        <span class="tag">Woodbury</span>
         <span class="tag">Walk-Forward</span>
         <span class="tag">Monte Carlo</span>
       </div>
     </section>
 
-    <!-- Multi-Agent Framework -->
+    <!-- Ensemble Fusion -->
     <section class="sec sec-border-top">
       <div class="prose reveal">
-        <h3 class="story-marker"><span class="story-date">2025 — Present</span>Multi-Agent Inference Framework</h3>
-        <p>A LangGraph-orchestrated multi-agent system where specialized agents each handle a domain, coordinate through belief propagation over a DAG, and produce a unified assessment with explainable reasoning. The application was clinical risk detection, but the architecture is domain-agnostic — it's the same routing-and-fusion pattern applicable to any multi-signal decision problem.</p>
-        <p>Knowledge distillation + mixed-precision quantization compressed the system 93% in size while keeping accuracy within 1.2% of the original. An adaptive router directs easy cases to lightweight models and escalates high-entropy cases to larger ones. Each agent incorporates RAG for evidence-grounded outputs. Validated on N=2,847 across 3 sites, deployed on Kubernetes with MCP-based integration, processing 500+ assessments daily at 99.7% uptime.</p>
+        <h3 class="story-marker"><span class="story-date">2024 — Present · Lead researcher</span>Hierarchical Ensemble Prediction with Belief-Propagation Fusion</h3>
+        <p>A hierarchical ensemble in which LSTM, graph neural network, and probabilistic models each read one physiological subsystem, and belief propagation fuses their outputs into a single risk assessment. The application is clinical (early detection of preeclampsia), but the architecture is domain-agnostic: it's the same fusion pattern that applies to any decision built from several partial, noisy signals.</p>
+        <p>Across four subsystems it reached an AUC of <strong>0.963</strong> on 2,847 patients at three sites, against a 0.890 baseline. In a prospective trial of 500 patients it caught events 14.3 days earlier than standard care (p &lt; 0.001). INT8 distillation then shrank the model by 93% while keeping accuracy within 1.2% of the original.</p>
       </div>
 
       <div class="stat-bar reveal">
@@ -176,22 +175,21 @@
           <div class="stat-desc">AUC-ROC</div>
         </div>
         <div>
-          <div class="stat-num">73%</div>
-          <div class="stat-desc">Cost reduction</div>
+          <div class="stat-num">14.3 days</div>
+          <div class="stat-desc">Earlier detection</div>
         </div>
         <div>
-          <div class="stat-num">&lt;2s</div>
-          <div class="stat-desc">Latency</div>
+          <div class="stat-num">93%</div>
+          <div class="stat-desc">Smaller after distillation</div>
         </div>
       </div>
 
       <div class="tags reveal">
-        <span class="tag">LangGraph</span>
-        <span class="tag">Multi-Agent</span>
+        <span class="tag">Belief Propagation</span>
+        <span class="tag">LSTM</span>
+        <span class="tag">GNN</span>
         <span class="tag">Knowledge Distillation</span>
-        <span class="tag">RAG</span>
-        <span class="tag">MCP</span>
-        <span class="tag">Kubernetes</span>
+        <span class="tag">INT8</span>
       </div>
     </section>
 
@@ -200,34 +198,73 @@
       <div class="sec-label reveal">Background</div>
       <h2 class="sec-heading reveal">Education & toolkit</h2>
 
-      <div class="edu-card reveal">
-        <div class="edu-school">Stanford University</div>
-        <div class="edu-degree">B.S. Mathematics</div>
-        <div class="edu-years">2017 — 2022</div>
-        <div class="edu-courses">Stochastic Calculus · Machine Learning · Convex Optimization · Mathematical Finance · Numerical Linear Algebra · Algorithms · Distributed Systems</div>
-      </div>
-
-      <div class="awards-strip reveal">
-        <div class="award"><span>🥇</span> WorldQuant Challenge — Gold</div>
-        <div class="award"><span>🤖</span> Mathematical Robot Competition — 1st</div>
-      </div>
-
-      <div class="skills-grid reveal" style="margin-top:3rem">
-        <div>
-          <div class="skill-label">Languages</div>
-          <div class="skill-list">Python · C++17 · R · MATLAB · SQL</div>
+      <div class="bg-grid reveal">
+        <div class="edu-card">
+          <div class="skill-label">Education</div>
+          <div class="edu-school">Stanford University</div>
+          <div class="edu-degree">B.S. Mathematics</div>
+          <div class="edu-years">2017 — 2022</div>
+          <div class="edu-courses"><span>Stochastic Calculus</span><span>Machine Learning</span><span>Convex Optimization</span><span>Mathematical Finance</span><span>Numerical Linear Algebra</span><span>Algorithms</span><span>Distributed Systems</span></div>
         </div>
-        <div>
+        <div class="honors-card">
+          <div class="skill-label">Honors</div>
+          <ul class="honors">
+            <li><span class="honor-icon">🥇</span><div><div class="honor-title">WorldQuant Challenge</div><div class="honor-note">Gold</div></div></li>
+            <li><span class="honor-icon">🤖</span><div><div class="honor-title">Zhang Wentian Prize</div><div class="honor-note">Mathematical Robot Competition · <span style="white-space:nowrap">1st of 16,000+</span></div></div></li>
+            <li><span class="honor-icon">🎤</span><div><div class="honor-title">CES 2026</div><div class="honor-note">Presenter</div></div></li>
+          </ul>
+        </div>
+      </div>
+
+      <div class="skills-grid reveal">
+        <div class="skill-group">
           <div class="skill-label">ML / AI</div>
-          <div class="skill-list">PyTorch · TensorFlow · XGBoost · LightGBM · LangGraph · HuggingFace · QLoRA · vLLM</div>
+          <div class="skill-chips">
+            <span class="chip">PyTorch</span>
+            <span class="chip">TensorFlow</span>
+            <span class="chip">XGBoost</span>
+            <span class="chip">LightGBM</span>
+            <span class="chip">LangGraph</span>
+            <span class="chip">HuggingFace</span>
+            <span class="chip">LoRA/QLoRA</span>
+            <span class="chip">vLLM</span>
+            <span class="chip">ONNX Runtime</span>
+          </div>
         </div>
-        <div>
-          <div class="skill-label">Quant</div>
-          <div class="skill-list">NumPy · pandas · statsmodels · cvxpy · zipline · Bloomberg · IBKR</div>
+        <div class="skill-group">
+          <div class="skill-label">Quant &amp; Optimization</div>
+          <div class="skill-chips">
+            <span class="chip">NumPy</span>
+            <span class="chip">pandas</span>
+            <span class="chip">SciPy</span>
+            <span class="chip">statsmodels</span>
+            <span class="chip">CVXPY</span>
+            <span class="chip">MOSEK</span>
+            <span class="chip">OR-Tools</span>
+          </div>
         </div>
-        <div>
+        <div class="skill-group">
           <div class="skill-label">Infrastructure</div>
-          <div class="skill-list">Docker · Kubernetes · Redis · PostgreSQL · Git · Linux · gRPC</div>
+          <div class="skill-chips">
+            <span class="chip">Docker</span>
+            <span class="chip">Kubernetes</span>
+            <span class="chip">Redis</span>
+            <span class="chip">PostgreSQL</span>
+            <span class="chip">MLflow</span>
+            <span class="chip">Milvus</span>
+            <span class="chip">AWS</span>
+            <span class="chip">Linux</span>
+          </div>
+        </div>
+        <div class="skill-group">
+          <div class="skill-label">Languages</div>
+          <div class="skill-chips">
+            <span class="chip">Python</span>
+            <span class="chip">C++17</span>
+            <span class="chip">OCaml</span>
+            <span class="chip">R</span>
+            <span class="chip">SQL</span>
+          </div>
         </div>
       </div>
     </section>
